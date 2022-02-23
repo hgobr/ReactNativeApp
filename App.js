@@ -7,26 +7,28 @@ import {
   Button,
   Vibration,
   Linking,
+  Pressable,
+  TouchableOpacity,
 } from 'react-native';
 
 export default function App() {
-  const [name, setName] = useState('React Native App');
+  const [value, setValue] = useState(0);
+  const [hitButton, setHitButton] = useState(0);
 
   const onClick = () => {
-    setName('Dev mobile app with Hugo');
+    Vibration.vibrate();
+    setValue(value + 5);
+    setHitButton(hitButton + 1);
   };
+
   return (
     <View style={styles.container}>
       <StatusBar style="inverted" />
-      <Text style={styles.Text}>{name}</Text>
-      <Button
-        color="red"
-        title="Update"
-        onPress={() => {
-          Vibration.vibrate();
-          onClick();
-        }}
-      ></Button>
+      <Text style={styles.Text}>{value}</Text>
+      <TouchableOpacity style={styles.button} onPress={() => onClick()}>
+        <Text style={styles.Text}>ADD</Text>
+      </TouchableOpacity>
+      <Text style={styles.Text}>You hit the button {hitButton} times</Text>
     </View>
   );
 }
@@ -43,5 +45,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 25,
     margin: 10,
+  },
+  button: {
+    borderRadius: 5,
+    backgroundColor: '#539BF3',
+    margin: 5,
   },
 });
