@@ -10,6 +10,7 @@ import {
   Pressable,
   TouchableOpacity,
   ScrollView,
+  TextInput,
 } from 'react-native';
 
 export default function App() {
@@ -22,6 +23,8 @@ export default function App() {
     setHitButton(hitButton + 1);
   };
 
+  const [name, setName] = useState();
+
   return (
     <View style={styles.container}>
       <StatusBar style="inverted" />
@@ -33,17 +36,24 @@ export default function App() {
         <Text style={styles.Text}>You hit the button {hitButton} times</Text>
       </View>
       <View style={styles.wrapSquares}>
-        <ScrollView>
-          <View style={[styles.viewBase, styles.view01]}>
-            <Text>1</Text>
-          </View>
-          <View style={[styles.viewBase, styles.view02]}>
-            <Text>2</Text>
-          </View>
-          <View style={[styles.viewBase, styles.view03]}>
-            <Text>3</Text>
-          </View>
-        </ScrollView>
+        <View style={[styles.squareBase, styles.square01]}>
+          <Text>1</Text>
+        </View>
+        <View style={[styles.squareBase, styles.square02]}>
+          <Text>2</Text>
+        </View>
+        <View style={[styles.squareBase, styles.square03]}>
+          <Text>3</Text>
+        </View>
+      </View>
+      <View>
+        <Text style={styles.Text}>Write your name</Text>
+        <TextInput
+          style={styles.input}
+          keyboardAppearance={'dark'}
+          onChangeText={(i) => setName(i)}
+        />
+        <Text style={styles.Text}>Your name is {name}</Text>
       </View>
     </View>
   );
@@ -73,9 +83,16 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   wrapSquares: {
-    flexDirection: 'row',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  viewBase: {
+  scrollView: {
+    alignSelf: 'center',
+    borderWidth: 5,
+    borderColor: '#fff',
+  },
+  squareBase: {
     width: 100,
     height: 100,
     justifyContent: 'center',
@@ -83,13 +100,23 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 5,
   },
-  view01: {
+  square01: {
     backgroundColor: '#99EDCC',
   },
-  view02: {
+  square02: {
     backgroundColor: '#CB958E',
   },
-  view03: {
+  square03: {
     backgroundColor: '#E36588',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#fff',
+    padding: 5,
+    width: 100,
+    borderRadius: 5,
+    color: '#fff',
+    alignSelf: 'center',
+    textAlign: 'center',
   },
 });
